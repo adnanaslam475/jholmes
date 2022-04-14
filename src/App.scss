@@ -104,7 +104,7 @@
   color: #2196F3 !important;
 
   &.submit-btn {
-    width: 50%;
+    width: 60%;
   }
 }
 
@@ -125,6 +125,7 @@
 .mb-20 {
   margin-bottom: 20px !important;
 }
+.mt-0{margin-top: 0px;}
 
 .mb-10 {
   margin-bottom: 10px !important;
@@ -155,6 +156,7 @@
 
 .warning {
   background-color: #FFF5E5;
+  width: 83%;
   border-radius: 5px;
   box-shadow: 5px 10px 8px 3px #b1afaf;
   z-index: 2;
@@ -167,22 +169,31 @@
   -webkit-transition: opacity 600ms, visibility 600ms;
   transition: opacity 600ms, visibility 600ms;
   display: flex;
+  
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
 }
-
+.apply{
+  visibility: visible;
+  opacity: 1;
+}
 .first {
-  div {
+  width: 400px;
+  height: 50px;
+  background-color: red;
+  .name {
     background-color: blue;
   }
-
   .company {
-    background-color: red;
   }
 }
 
 .second {}
-
 .third {}
-
 .fourth {}
-
 .fifth {}
+.carousel .control-dots{
+  bottom: 20px;
+  color:  lightgray;
+}

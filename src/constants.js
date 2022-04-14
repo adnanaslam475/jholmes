@@ -4,9 +4,11 @@ export const formInputs = [
     id: "firstName",
     placeholder: "First name *",
     required: true,
+    error:'First Name is requried',
   },
   {
     name: "lastName",
+    error:'Last Name is requried',
     id: "lastName",
     placeholder: "Last name *",
     required: true,
@@ -26,13 +28,14 @@ export const formInputs = [
   {
     name: "companyEmail",
     id: "companyEmail",
+    error:'Email Address is requried',
     placeholder: "Company Email Address *",
     required: true,
   },
 ];
 export const detailsInputs = [
   {
-    name: "firstName",
+    name: "presenterName",
     label: "Presenter Name",
   },
   {
