@@ -37,7 +37,7 @@ class CloudinaryUploadWidget extends Component {
         focusRipple
         centerRipple
       >
-        Choose Image
+        Upload Image
       </Button>
     );
   }

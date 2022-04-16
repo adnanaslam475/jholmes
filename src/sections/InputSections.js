@@ -61,8 +61,8 @@ const InputSections = () => {
   }, [settingState]);
   return (
     <Grid container component={Paper} className="settings">
-      <Typography variant="h5">Settings</Typography>
       <form ref={ref} className="form">
+      <Typography variant="h5">Settings</Typography>
         <Grid container spacing={2} className="main">
           <Grid {...styles}>
             <FontPicker
@@ -79,7 +79,7 @@ const InputSections = () => {
               variant="standard"
               className="h-55 mb-20 clr-gray"
               onOpen={() => setShow("font")}
-              renderValue={() => <p>Font colour</p>}
+              renderValue={() => <p className="ml-15">Font colour</p>}
               onClose={onClose}
               error={settingState.fontColor.error}
               onBlur={() => {
@@ -133,7 +133,7 @@ const InputSections = () => {
               displayEmpty
               variant="standard"
               className="h-55 mb-20 clr-gray"
-              renderValue={() => <p>Primary colour</p>}
+              renderValue={() => <p className="ml-15">Primary colour</p>}
               onOpen={() => setShow("primary")}
               onClose={onClose}
               // style={{backgroundColor:'red'}}
@@ -155,7 +155,7 @@ const InputSections = () => {
               fullWidth
               displayEmpty
               className="h-55 mb-20 clr-gray"
-              renderValue={() => <p>Secondary colour</p>}
+              renderValue={() => <p className="ml-15">Secondary colour</p>}
               onOpen={() => setShow("secondary")}
               onClose={onClose}
               variant="standard"

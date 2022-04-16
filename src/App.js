@@ -2,19 +2,21 @@ import "./App.scss";
 import { Grid } from "@mui/material";
 import InputSection from "./sections/InputSections";
 import DownloadSection from "./sections/DownloadSection";
+import { useRef } from "react";
 
 function App() {
+  const ref= useRef(null);
   return (
     <div className="App">
       <Grid
         container
-        spacing={3}
+        spacing={2}
       >
-        <Grid item md={4} sm={5} xs={12} lg={4} xl={4}>
+        <Grid item md={5} sm={5} xs={12} lg={5} xl={5}>
           <InputSection />
         </Grid>
-        <Grid item md={6} sm={7} xs={12} lg={6} xl={6}>
-          <DownloadSection />
+        <Grid item md={7} sm={7} xs={12} lg={7} xl={7}>
+          <DownloadSection ref={ref} />
         </Grid>
       </Grid>
     </div>

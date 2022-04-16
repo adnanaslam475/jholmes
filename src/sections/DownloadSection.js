@@ -1,21 +1,34 @@
 import React, { forwardRef, useState } from "react";
-import { FormControl, Grid, Paper, TextField, Typography } from "@mui/material";
-import { detailsInputs, formInputs } from "../constants";
-import { Carousel } from 'react-responsive-carousel'
+import {
+  Button,
+  FormControl,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { detailsInputs } from "../constants";
+import ResCarousel from "../components/Carousel";
 
 const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
 const DownloadSection = forwardRef(({ name }, ref) => {
   const [details, setDetails] = useState({
-    presenter: { value: "", error: false },
+    presenterName: { value: "", error: false },
     company: { value: "", error: false },
   });
+  const [add, setadd] = useState([]);
   const handleChange = (e) => {
     setDetails((prev) => ({
       ...prev,
       [e.target.name]: { error: false, value: e.target.value },
     }));
   };
-  const onBlur = () => { };
+  const onBlur = () => {};
+  const submit = (e) => {
+    e.preventDefault();
+    setadd([...add, details]);
+    ref.current.reset();
+  };
   return (
     <form ref={ref}>
       <Grid container component={Paper} className="downloads">
@@ -34,26 +47,17 @@ const DownloadSection = forwardRef(({ name }, ref) => {
               />
             </Grid>
           ))}
+          <button onClick={submit}>add</button>
         </Grid>
-        <Grid container>
-          <Carousel showArrows={true}
-          showThumbs={false}
-          // renderArrowNext
-          // renderArrowPrev
-          // onChange={onChange} 
-          // onClickItem={onClickItem} 
-          >
-            <div>
-              {/* <img src="https://miro.medium.com/max/1135/1*E5VQSUDJZ-mfc_G7NkIZIw.png" /> */}
-              <div style={{border:'1px solid red'}}>
-                <div className="first">adnannaaa</div>
-              </div>
-            </div>
-            <div>
-              <img src="https://blog.logrocket.com/wp-content/uploads/2019/08/building-carousel-react-using-only-hook-nocdn.jpg" />
-            </div>
-          </Carousel>
-        </Grid>
+        <ResCarousel details={details} />
+        <Button
+          onClick={() => ""}
+          variant="contained"
+          type="submit"
+          className="upload-btn save-btn"
+        >
+          Save
+        </Button>
       </Grid>
     </form>
   );
