@@ -81,14 +81,20 @@ h6 {
 
 .form {
   padding: 20px;
-text-align: left;
-  
-  @media only screen and(max-width: 540px){
+  text-align: left;
+
+  @media only screen and(max-width: 540px) {
     .main>* {
       margin-bottom: 10px !important;
-      .clr-gray{margin-bottom: 0px !important;}      
-      .mb-20{margin-bottom: 0px !important;}      
-  }
+
+      .clr-gray {
+        margin-bottom: 0px !important;
+      }
+
+      .mb-20 {
+        margin-bottom: 0px !important;
+      }
+    }
   }
 
   div[tabindex="-1"] {
@@ -145,14 +151,19 @@ text-align: left;
   padding-bottom: 10px;
 }
 
+
+.pb-16 {
+  padding-bottom: 16px;
+}
+
 .mb-10 {
   margin-bottom: 10px !important;
 }
 
 .drop-shadow {
-  width: 40px;
+  width: 20px;
   cursor: pointer;
-  height: 40px;
+  height: 20px;
 }
 
 .user-form-dialog {
@@ -162,6 +173,7 @@ text-align: left;
 .downloads {
   position: relative;
   padding: 20px;
+  padding-bottom: 40px;
 }
 
 .clr-gray {
@@ -178,15 +190,15 @@ text-align: left;
   border-radius: 5px;
   box-shadow: 5px 10px 8px 3px #b1afaf;
   z-index: 2;
-  position: absolute 40px 0 0 0;
-  // top: 40px;
+  position: absolute;
+  inset: 40px 0px 0px 0px;
   padding: 20px;
   height: 5px;
+  display: flex;
   align-items: center;
   transition: all 10s ease;
   -webkit-transition: opacity 600ms, visibility 600ms;
   transition: opacity 600ms, visibility 600ms;
-  display: flex;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s linear;
@@ -285,6 +297,41 @@ text-align: left;
   display: flex;
   flex-wrap: wrap;
   color: white;
+  // border: 1px solid black;
+
+  .carousel-slider {
+    padding: 30px;
+  }
+
+  .control-arrow {
+    opacity: 1;
+  }
+
+  .control-next {
+    height: fit-content;
+    top: 45% !important;
+  }
+
+  .control-next::before {
+    content: url("../src/assets/arrownext.svg") !important;
+  }
+
+  .control-next:hover {
+    background: none !important;
+  }
+
+  .control-prev {
+    height: fit-content;
+    top: 45% !important;
+  }
+
+  .control-prev::before {
+    content: url("../src/assets/arrowprev.svg") !important;
+  }
+
+  .control-prev:hover {
+    background: none !important;
+  }
 }
 
 .secondlogo {
@@ -298,9 +345,17 @@ text-align: left;
   padding: 10px;
   width: 100%;
 
+  .carousel-status {
+    display: none;
+  }
+
   .control-dots {
-    bottom: 20px;
     color: lightgray;
+
+    li {
+      margin-left: -25px !important;
+      margin-right: 45px !important;
+    }
   }
 }
 
@@ -342,4 +397,18 @@ text-align: left;
     position: absolute 0%;
     margin-left: 5px;
   }
+}
+
+.z-2 {
+  z-index: 2;
+}
+
+.min-200 {
+  min-width: 200px;
+}
+
+.shadow-picker {
+  display: flex;
+  height: 300px;
+  width: 300px;
 }
