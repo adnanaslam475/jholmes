@@ -2,7 +2,6 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import { styles } from "../../constants";
-// import CarouselItem from "../CarouselItem";
 const ResCarousel = ({
   details,
   selectedStyle,
@@ -10,9 +9,7 @@ const ResCarousel = ({
   boxShadow,
   settingState,
 }) => {
-  const onClick = i => setSelectedStyle(i);
-  // console.log('first', settingState, selectedStyle)
-
+  const onClick = (e) => setSelectedStyle(+e.target.id);
   return (
     <Grid container style={{}}>
       <Carousel
@@ -24,11 +21,14 @@ const ResCarousel = ({
         <div className="carousel-main">
           {styles.map((v) => (
             <>
-              {v.div({ ...settingState, selectedStyle, boxShadow }, onClick, details)}
+              {v.div(
+                { ...settingState, selectedStyle, boxShadow },
+                onClick,
+                details
+              )}
             </>
           ))}
         </div>
-        {/* {v.div(settingState, onClick, details)} */}
       </Carousel>
     </Grid>
   );

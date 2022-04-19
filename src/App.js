@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import InputSection from "./sections/InputSections";
 import DownloadSection from "./sections/DownloadSection";
 import { useRef, useState } from "react";
-
+const logo = localStorage.getItem("logoUrl");
 function App() {
   const ref = useRef(null);
   const [settingState, setSettingState] = useState({
@@ -13,7 +13,7 @@ function App() {
     secondaryColor: { value: "", error: false },
     presenterFontSize: { value: "", error: false },
     companyFontSize: { value: "", error: false },
-    logoUrl: { value: "", error: false, fileName: "" },
+    logoUrl: { value: logo, error: false, fileName: logo.split("/").pop() },
   });
   const [shadowColor, setShadowColor] = useState("gray");
   const [boxShadow, setBoxShadow] = useState({
@@ -30,7 +30,9 @@ function App() {
     .forEach((x) => {
       b[x] = boxShadow[x];
     });
-  const updatedShadow = `${Object.values(b).join(" ")} ${shadowColor?.hex}`;
+  const updatedShadow = `${Object.values(b).join(" ")} ${
+    shadowColor?.hex || shadowColor
+  }`;
   return (
     <div className="App">
       <Grid container spacing={2}>

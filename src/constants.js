@@ -69,97 +69,184 @@ export const styles = [
         primaryColor,
         fontColor,
         presenterFontSize,
-        companyFontSize, selectedStyle, boxShadow
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+      },
+      onClick,
+      details
+    ) => {
+      return (
+        <div id='0'
+          className={`main pr-5 ${selectedStyle === 0 && " border"}`}
+          onClick={onClick}
+          style={{ fontFamily: font.value, boxShadow }}
+        >
+          <div
+            className="blue first"
+            style={{
+              backgroundColor: secondaryColor.value,
+              color: fontColor.value,
+            }}
+          >
+            <h5 style={{ fontSize: presenterFontSize.value }}>
+              {details.presenterName}
+            </h5>
+          </div>
+          <div
+            className="red"
+            style={{
+              backgroundColor: primaryColor.value,
+              fontSize: companyFontSize.value,
+            }}
+          >
+            {details.company}
+          </div>
+        </div>
+      );
+    },
+  },
+  {
+    div: (
+      {
+        font,
+        // secondaryColor,
+        primaryColor,
+        fontColor,
+        presenterFontSize,
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+        logoUrl,
       },
       onClick,
       details
     ) => (
-      <div
-        className={`main pr-5 ${selectedStyle === 0 && ' border'}`}
-        onClick={() => onClick(0)}
-        style={{ fontFamily: font, }}
+      <div id='1'
+        className={`row ${selectedStyle === 1 && " border"}`}
+        onClick={() => onClick(1)}
+        style={{
+          fontFamily: font.value,
+          boxShadow,
+          color: fontColor.value,
+        }}
       >
-        <div
-          className="blue first"
-          style={{
-            backgroundColor: secondaryColor.value,
-            color: fontColor.value,
-          }}
-        >
-          <h5 style={{ fontSize: presenterFontSize.value }}>
-            {details.presenterName}
-          </h5>
-        </div>
-        <div
-          className="red"
-          style={{
-            backgroundColor: primaryColor.value,
-            fontSize: companyFontSize.value,
-          }}
-        >
-          {details.company}
-        </div>
-      </div>
-    ),
-  },
-  {
-    div: ({ selectedStyle }, onClick, details) => (
-      <div className={`row ${selectedStyle === 1 && ' border'}`}
-        // style={{width:'50%'}} 
-        onClick={() => onClick(1)}>
         <div className="second-inner">
-          <img src={img} className="secondlogo" alt="" />
-          <div className="secondtext" style={{ fontFamily: "" }}>
-            <h3>{details.presenterName}</h3>
-            <p>{details.company}</p>
+          <img
+            src={logoUrl.value}
+            style={{
+              border: `1px solid ${primaryColor.value}`,
+              color: font.value,
+            }}
+            className="secondlogo"
+            alt="llll"
+          />
+          <div className="secondtext">
+            <h3
+              style={{
+                fontSize: presenterFontSize.value,
+              }}
+            >
+              {details.presenterName}
+            </h3>
+            <p
+              style={{
+                fontSize: companyFontSize.value,
+              }}
+            >
+              {details.company}
+            </p>
           </div>
         </div>
       </div>
     ),
   },
   {
-    div: ({ selectedStyle }, onClick, details) => (
-      <div
-        style={{ minWidth: "50%" }}
+    div: (
+      {
+        font,
+        secondaryColor,
+        fontColor,
+        presenterFontSize,
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+      },
+      onClick,
+      details
+    ) => (
+      <div id='2'
+        style={{
+          minWidth: "50%",
+          color: fontColor.value,
+          fontFamily: font.value,
+          boxShadow
+        }}
         onClick={() => onClick(2)}
-        className={`pr-5 ${selectedStyle === 2 && ' border'}`}
-      >
-        <div className="main border bg-red h-95">
-          <h2>{details.presenterName}</h2>
-          <p>{details.company}</p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    div: ({ selectedStyle }, onClick, details) => (
-      <div
-        className={`main relative ${selectedStyle === 3 && ' border'}`}
-        onClick={() => onClick(3)}
-        style={{ height: "50px", fontFamily: "" }}
-      >
-        <div className="blue first">
-          <h5>{details?.presenterName}</h5>
-        </div>
-        <div className="red red-four">{details?.company}</div>
-      </div>
-    ),
-  },
-  {
-    div: ({ selectedStyle, font }, onClick, details) => (
-      <div
-        style={{ minWidth: "50%" }}
-        onClick={() => onClick(4)}
-        className={`pr-5 ${selectedStyle === 4 && ' border'}`}
+        className={`pr-5 ${selectedStyle === 2 && " border"}`}
       >
         <div
-          className="main five pr-5"
-          style={{
-            fontFamily: font,
-          }}
+          style={{ backgroundColor: secondaryColor.value }}
+          className="main border bg-red h-95"
         >
+          <h2 style={{ fontSize: presenterFontSize.value }}>
+            {details.presenterName}
+          </h2>
+          <p style={{ fontSize: companyFontSize.value }}>{details.company}</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    div: (
+      {
+        font,
+        secondaryColor,
+        primaryColor,
+        fontColor,
+        presenterFontSize,
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+      },
+      onClick,
+      details
+    ) => (
+      <div id='3'
+        className={`main relative ${selectedStyle === 3 && " border"}`}
+        onClick={onClick}
+        style={{ height: "50px", fontFamily: font.value,boxShadow }}
+      >
+        <div className="blue first">
+          <h5>{details.presenterName}</h5>
+        </div>
+        <div className="red red-four">{details.company}</div>
+      </div>
+    ),
+  },
+  {
+    div: (
+      {
+        font,
+        secondaryColor,
+        primaryColor,
+        fontColor,
+        presenterFontSize,
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+      },
+      onClick,
+      details
+    ) => (
+      <div id='4'
+        style={{ minWidth: "50%", fontFamily: font.value,boxShadow }}
+        onClick={onClick}
+        className={`pr-5 ${selectedStyle === 4 && " border"}`}
+      >
+        <div className="main five pr-5" style={{}}>
           <div className="blue">
-            <h5>{details?.presenterName}</h5>
+            <h5>{details.presenterName}</h5>
           </div>
           <div className="">{details.company}</div>
         </div>
@@ -167,16 +254,31 @@ export const styles = [
     ),
   },
   {
-    div: ({ selectedStyle }, onClick, details) => (
-      <div
-        className={`main ${selectedStyle === 5 && ' border'}`}
+    div: (
+      {
+        logoUrl,
+        font,
+        secondaryColor,
+        primaryColor,
+        fontColor,
+        presenterFontSize,
+        companyFontSize,
+        selectedStyle,
+        boxShadow,
+      },
+      onClick,
+      details
+    ) => (
+      <div id='5'
+        className={`main ${selectedStyle === 5 && " border"}`}
         style={{
-          fontFamily: "",
+          fontFamily: font.value,
+          boxShadow
         }}
-        onClick={() => onClick(5)}
+        onClick={onClick}
       >
         <div className="second-inner bg-red">
-          <img src={img} className="secondlogo" alt="" />
+          <img src={logoUrl.value} className="secondlogo" alt="" />
           <div className="secondtext" style={{ fontFamily: "" }}>
             <h3>{details.presenterName}</h3>
             <p>{details.company}</p>

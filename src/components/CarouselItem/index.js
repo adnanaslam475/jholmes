@@ -1,6 +1,4 @@
 import React from "react";
-export let img =
-  "https://goodmorningimageshddownload.com/wp-content/uploads/2018/07/Animal-goodfg-morning-imafg-300x224.jpg";
 
 function CarouselItem({ details, selectedStyle }) {
   return (
@@ -15,7 +13,7 @@ function CarouselItem({ details, selectedStyle }) {
       {/* second */}
       <div className="main border row">
         <div className="second-inner">
-          <img src={img} className="secondlogo" />
+          <img src={'img'} className="secondlogo" />
           <div className="secondtext" style={{ fontFamily: "" }}>
             <h3>dfdfsssssssssssssssswadnanaslam</h3>
             <p>comspny</p>
@@ -57,7 +55,7 @@ function CarouselItem({ details, selectedStyle }) {
         }}
       >
         <div className="second-inner bg-red">
-          <img src={img} className="secondlogo" />
+          <img src={'img'} className="secondlogo" />
           <div className="secondtext" style={{ fontFamily: "" }}>
             <h3>dfdfsssssssssssssssswadnanaslam</h3>
             <p>comspny</p>

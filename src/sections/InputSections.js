@@ -12,9 +12,8 @@ import {
   Fade,
 } from "@mui/material";
 import { isEmpty } from "lodash";
-// import { makeStyles } from "@mui/styles";
 import FontPicker from "font-picker-react";
-import { SwatchesPicker, ChromePicker, SketchPicker } from "react-color";
+import { SwatchesPicker, ChromePicker, } from "react-color";
 
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 // import { dropinputs } from "../constants";
@@ -26,7 +25,17 @@ export function maxLengthInput(input, maxLength) {
     : Math.max(0, input).toString().slice(0, maxLength);
 }
 const InputSections = forwardRef(
-  ({ boxShadow, shadowColor, setBoxShadow, setShadowColor, settingState, setSettingState }, refa) => {
+  (
+    {
+      boxShadow,
+      shadowColor,
+      setBoxShadow,
+      setShadowColor,
+      settingState,
+      setSettingState,
+    },
+    refa
+  ) => {
     const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
     const [show, setShow] = useState("");
     const [openDropShadow, setOpenDropShadow] = useState(false);
@@ -34,7 +43,6 @@ const InputSections = forwardRef(
     const [anchorEl, setAnchorEl] = useState(null);
     const ref = useRef(null);
     const popperRef = useRef(null);
-
 
     const handleChange = (v, name) => {
       setSettingState((prev) => ({
@@ -46,7 +54,7 @@ const InputSections = forwardRef(
       }));
     };
     const errorHandler = ({ target }) => {
-      !settingState[target.name].value.length &&
+      !settingState[target?.name].value.toString().trim().length &&
         setSettingState((prev) => ({
           ...prev,
           [target.name]: {
@@ -80,9 +88,6 @@ const InputSections = forwardRef(
         [name]: `${value || 0}px`,
       }));
     };
-    useEffect(() => {
-      // console.log("setingstate", settingState);
-    }, [settingState]);
 
     return (
       <Grid container component={Paper} className="settings">
@@ -107,7 +112,7 @@ const InputSections = forwardRef(
                 renderValue={() => <p className="ml-15">Font colour</p>}
                 onClose={onClose}
                 name="fontColor"
-                value={settingState.fontColor.value.hex || ''}
+                value={settingState.fontColor.value.hex || ""}
                 error={settingState.fontColor.error}
                 onBlur={errorHandler}
               />
@@ -115,9 +120,7 @@ const InputSections = forwardRef(
                 <SwatchesPicker
                   color={settingState.fontColor.value}
                   className="color-picker mb-20"
-                  onChange={(e) => {
-                    handleChange(e, "fontColor");
-                  }}
+                  onChangeComplete={(value) => handleChange(value.hex, "fontColor")}
                 />
               )}
             </Grid>
@@ -144,10 +147,8 @@ const InputSections = forwardRef(
                 onChange={(e) =>
                   handleChange(+e.target.value, "companyFontSize")
                 }
-                onBlur={() =>
-                  !settingState.companyFontSize.value.length &&
-                  errorHandler("companyFontSize")
-                }
+                name="companyFontSize"
+                onBlur={errorHandler}
                 variant="filled"
                 label="Company font size"
                 className="mb-20"
@@ -163,7 +164,7 @@ const InputSections = forwardRef(
                 onOpen={() => setShow("primary")}
                 onClose={onClose}
                 type="number"
-                value={settingState.primaryColor.value.hex || ''}
+                value={settingState.primaryColor.value.hex || ""}
                 name="primaryColor"
                 style={{}}
                 onBlur={errorHandler}
@@ -172,7 +173,7 @@ const InputSections = forwardRef(
                 <SwatchesPicker
                   className="color-picker mb-20 select"
                   color={settingState.primaryColor.value}
-                  onChange={(e) => handleChange(e, "primaryColor")}
+                  onChangeComplete={(v) => handleChange(v.hex, "primaryColor")}
                 />
               )}
             </Grid>
@@ -185,13 +186,13 @@ const InputSections = forwardRef(
                 onOpen={() => setShow("secondary")}
                 onClose={onClose}
                 name="secondaryColor"
-                value={settingState.secondaryColor.value.hex || ''}
+                value={settingState.secondaryColor.value.hex || ""}
                 variant="standard"
                 onBlur={errorHandler}
               />
               {show === "secondary" && (
                 <SwatchesPicker
-                  onChange={(e) => handleChange(e, "secondaryColor")}
+                  onChangeComplete={(v) => handleChange(v.hex, "secondaryColor")}
                   color={settingState.secondaryColor.value}
                   className="color-picker"
                 />
@@ -200,7 +201,6 @@ const InputSections = forwardRef(
             <Grid {...styles}>
               <div className="choose_file">
                 <CloudinaryUploadWidget imagesHandler={imagesHandler} />
-                <p>{settingState.logoUrl.fileName}</p>
               </div>
             </Grid>
             <Grid {...styles}>{settingState.logoUrl.fileName}</Grid>
@@ -217,22 +217,35 @@ const InputSections = forwardRef(
                   <Fade {...TransitionProps} timeout={350}>
                     <Paper className="shadow-picker">
                       <div>
-                        {["offset-x", "offset-x", "blur-radius", "spread-radius"].map((v, i) => (
-                          <><label className="mb-10">{v}</label> <input
-                            key={i}
-                            type='range'
-                            // className="pb-16"
-                            name={i}
-                            onDragEnd={handledropShadow}
-                            min="-10"
-                            max="10"
-                            value={+boxShadow[i].replace("px", "")}
-                          /></>
-                        ))}
+                        {[
+                          "offset-x",
+                          "offset-y",
+                          "blur-radius",
+                          "spread-radius",
+                        ].map((v, i) => {
+                          console.log(+boxShadow[i].replace("px", ""));
+                          return (
+                            <>
+                              <label className="mb-10">{v}</label>{" "}
+                              <input
+                                key={i}
+                                type="range"
+                                name={i}
+                                onChange={handledropShadow}
+                                min="-10"
+                                max="10"
+                                value={+boxShadow[i].replace("px", "")}
+                              />
+                            </>
+                          );
+                        })}
                       </div>
                       <ChromePicker
                         color={shadowColor}
-                        onChange={(v) => setShadowColor(v)}
+                        onChangeComplete={(v) => {
+                          setShadowColor(v);
+                          console.log("onChangeComplete");
+                        }}
                         className="min-200"
                       />
                     </Paper>

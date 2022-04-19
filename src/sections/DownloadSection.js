@@ -16,8 +16,8 @@ const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
 const DownloadSection = forwardRef(
   ({ downloadAssets, updatedShadow, settingState }, ref) => {
     const [details, setDetails] = useState({
-      presenterName: { value: "iiiiiii", error: false },
-      company: { value: "xcxxxxxxxx", error: false },
+      presenterName: { value: "", error: false },
+      company: { value: "", error: false },
     });
     const [selectedStyle, setSelectedStyle] = useState({});
     const [add, setadd] = useState([]);
