@@ -64,10 +64,6 @@ h6 {
   border-bottom: 1px solid #2196F3;
 }
 
-// div[tabindex="-1"] {
-//   // display: none;
-// }
-
 .settings {
   box-shadow: #282c34;
 }
@@ -82,11 +78,9 @@ h6 {
 .form {
   padding: 20px;
   text-align: left;
-
   @media only screen and(max-width: 540px) {
     .main>* {
       margin-bottom: 10px !important;
-
       .clr-gray {
         margin-bottom: 0px !important;
       }
@@ -97,11 +91,22 @@ h6 {
     }
   }
 
-  div[tabindex="-1"] {
-    display: none;
+}
+div[id="menu-fontColor"] { // not run
+  div[tabindex="-1"] { // not run
+  display: none;
   }
 }
-
+div[id="menu-secondaryColor"] {
+  div[tabindex="-1"] {
+  display: none;
+  }
+}
+div[id="menu-primaryColor"] {
+  div[tabindex="-1"] { 
+  display: none;
+  }
+}
 .h-55 {
   height: 55px;
 }
@@ -228,14 +233,15 @@ h6 {
 
 .main {
   min-width: 50%;
-  flex-basis: 50%;
-  display: flex;
+  // flex-basis: 50%;
+  // display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   line-break: anywhere;
   margin-top: 15px;
-
+&.no-cursor{cursor: none;}
   .blue {
     padding: 5px;
     min-width: 100%;
@@ -245,6 +251,7 @@ h6 {
     &.first {
       @extend .pb-10;
       font-weight: 800;
+      min-height: 42px;
       font-size: 24px;
     }
   }
@@ -253,6 +260,7 @@ h6 {
     @extend .pb-5;
     background-color: red;
     width: 50%;
+    min-height: 25px;
   }
 }
 
@@ -297,7 +305,8 @@ h6 {
   display: flex;
   flex-wrap: wrap;
   color: white;
-  // border: 1px solid black;
+  border: 1px solid black;
+  max-height: 50vh;
 
   .carousel-slider {
     padding: 30px;
@@ -337,7 +346,6 @@ h6 {
 .secondlogo {
   height: 95%;
   width: 45px !important;
-  border: 1px solid black;
   border-radius: 50%;
 }
 
@@ -361,8 +369,9 @@ h6 {
 
 .secondtext {
   text-align: start;
-  padding: 5px;
-  min-height: 30px;
+  min-width: 100%;
+  padding: 0px 5px 5px 5px;
+  min-height: 55px;
   background-color: #5C6BC0;
   display: flex;
   flex-direction: column;
@@ -371,6 +380,7 @@ h6 {
 .second-inner {
   display: flex;
   align-items: center;
+  min-width: 100%;
   line-break: anywhere;
 }
 
@@ -386,11 +396,14 @@ h6 {
 .five {
   background-color: red;
   position: relative;
-
+height: 100%;
+height: 60px;
   div:first-child {
-    position: absolute 0% 0% 0% 0%;
-    min-width: 0%;
+    position: absolute;
+    top: 0%;
+    min-width: 0;
     width: 90%;
+    height: 36px;
   }
 
   div:nth-child(2) {
@@ -412,3 +425,4 @@ h6 {
   height: 300px;
   width: 300px;
 }
+.h-95{min-height: 95%;}

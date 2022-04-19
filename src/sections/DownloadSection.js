@@ -14,10 +14,10 @@ import UserInformationForm from "../components/UserInformationForm";
 
 const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
 const DownloadSection = forwardRef(
-  ({ downloadAssets, boxShadow, settingState }, ref) => {
+  ({ downloadAssets, updatedShadow, settingState }, ref) => {
     const [details, setDetails] = useState({
-      presenterName: { value: "", error: false },
-      company: { value: "", error: false },
+      presenterName: { value: "iiiiiii", error: false },
+      company: { value: "xcxxxxxxxx", error: false },
     });
     const [selectedStyle, setSelectedStyle] = useState({});
     const [add, setadd] = useState([]);
@@ -28,7 +28,7 @@ const DownloadSection = forwardRef(
         [e.target.name]: { error: false, value: e.target.value },
       }));
     };
-    const onBlur = () => {};
+    const onBlur = () => { };
     const submit = (e) => {
       e.preventDefault();
       setadd([...add, details]);
@@ -55,9 +55,12 @@ const DownloadSection = forwardRef(
               </Grid>
             ))}
             <ResCarousel
-              details={details}
+              details={{
+                presenterName: details.presenterName.value,
+                company: details.company.value
+              }}
               selectedStyle={selectedStyle}
-              boxShadow={boxShadow}
+              boxShadow={updatedShadow}
               setSelectedStyle={setSelectedStyle}
               settingState={settingState}
             />

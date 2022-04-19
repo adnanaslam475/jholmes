@@ -52,12 +52,6 @@ export const detailsInputs = [
     label: "Company",
   },
 ];
-export const dropinputs = [
-  { name: "0" },
-  { name: "1" },
-  { name: "2" },
-  { name: "3" },
-];
 // font: { value: "", error: false },
 //     fontColor: { value: "", error: false },
 //     primaryColor: { value: "", error: false },
@@ -75,15 +69,15 @@ export const styles = [
         primaryColor,
         fontColor,
         presenterFontSize,
-        companyFontSize,
+        companyFontSize, selectedStyle, boxShadow
       },
       onClick,
       details
     ) => (
       <div
-        className="main pr-5"
+        className={`main pr-5 ${selectedStyle === 0 && ' border'}`}
         onClick={() => onClick(0)}
-        style={{ fontFamily: font }}
+        style={{ fontFamily: font, }}
       >
         <div
           className="blue first"
@@ -93,7 +87,7 @@ export const styles = [
           }}
         >
           <h5 style={{ fontSize: presenterFontSize.value }}>
-            {details?.presenterName.value}
+            {details.presenterName}
           </h5>
         </div>
         <div
@@ -103,78 +97,79 @@ export const styles = [
             fontSize: companyFontSize.value,
           }}
         >
-          {details?.company.value}
+          {details.company}
         </div>
       </div>
     ),
   },
   {
-    div: (settingState, onClick, details) => (
-      <div className="main border row" onClick={() => onClick(1)}>
+    div: ({ selectedStyle }, onClick, details) => (
+      <div className={`row ${selectedStyle === 1 && ' border'}`}
+        // style={{width:'50%'}} 
+        onClick={() => onClick(1)}>
         <div className="second-inner">
           <img src={img} className="secondlogo" alt="" />
           <div className="secondtext" style={{ fontFamily: "" }}>
-            <h3>dfdfsssssssssssssssswadnanaslam</h3>
-
-            <p>comspny</p>
+            <h3>{details.presenterName}</h3>
+            <p>{details.company}</p>
           </div>
         </div>
       </div>
     ),
   },
   {
-    div: (settingState, onClick, details) => (
+    div: ({ selectedStyle }, onClick, details) => (
       <div
         style={{ minWidth: "50%" }}
         onClick={() => onClick(2)}
-        className="pr-5"
+        className={`pr-5 ${selectedStyle === 2 && ' border'}`}
       >
-        <div className="main border bg-red">
-          <h2>{""}</h2>
-          <p>{""}</p>
+        <div className="main border bg-red h-95">
+          <h2>{details.presenterName}</h2>
+          <p>{details.company}</p>
         </div>
       </div>
     ),
   },
   {
-    div: (settingState, onClick, details) => (
+    div: ({ selectedStyle }, onClick, details) => (
       <div
-        className="main relative"
+        className={`main relative ${selectedStyle === 3 && ' border'}`}
         onClick={() => onClick(3)}
         style={{ height: "50px", fontFamily: "" }}
       >
         <div className="blue first">
-          <h5>{details?.presenterName?.value}</h5>
+          <h5>{details?.presenterName}</h5>
         </div>
-        <div className="red red-four">{details?.company?.value}</div>
+        <div className="red red-four">{details?.company}</div>
       </div>
     ),
   },
   {
-    div: (settingState, onClick, details) => (
+    div: ({ selectedStyle, font }, onClick, details) => (
       <div
         style={{ minWidth: "50%" }}
         onClick={() => onClick(4)}
-        className="pr-5"
+        className={`pr-5 ${selectedStyle === 4 && ' border'}`}
       >
         <div
           className="main five pr-5"
           style={{
-            fontFamily: "",
+            fontFamily: font,
           }}
         >
           <div className="blue">
-            <h5>{details?.presenterName?.value}</h5>
+            <h5>{details?.presenterName}</h5>
           </div>
-          <div className="">{"sdaaaaaaaaaaa"}</div>
+          <div className="">{details.company}</div>
         </div>
       </div>
     ),
   },
   {
-    div: (settingState, onClick, details) => (
+    div: ({ selectedStyle }, onClick, details) => (
       <div
-        className="main"
+        className={`main ${selectedStyle === 5 && ' border'}`}
         style={{
           fontFamily: "",
         }}
@@ -183,8 +178,8 @@ export const styles = [
         <div className="second-inner bg-red">
           <img src={img} className="secondlogo" alt="" />
           <div className="secondtext" style={{ fontFamily: "" }}>
-            <h3>dfdfsssssssssssssssswadnanaslam</h3>
-            <p>comspny</p>
+            <h3>{details.presenterName}</h3>
+            <p>{details.company}</p>
           </div>
         </div>
       </div>

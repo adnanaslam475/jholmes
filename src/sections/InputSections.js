@@ -26,30 +26,16 @@ export function maxLengthInput(input, maxLength) {
     : Math.max(0, input).toString().slice(0, maxLength);
 }
 const InputSections = forwardRef(
-  ({ boxShadow, setBoxShadow, settingState, setSettingState }, refa) => {
+  ({ boxShadow, shadowColor, setBoxShadow, setShadowColor, settingState, setSettingState }, refa) => {
     const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
     const [show, setShow] = useState("");
-    const [shadowColor, setShadowColor] = useState("gray");
     const [openDropShadow, setOpenDropShadow] = useState(false);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const ref = useRef(null);
     const popperRef = useRef(null);
-    // const [settingState, setSettingState] = useState({
-    //   font: { value: "", error: false },
-    //   fontColor: { value: "", error: false },
-    //   primaryColor: { value: "", error: false },
-    //   secondaryColor: { value: "", error: false },
-    //   presenterFontSize: { value: "", error: false },
-    //   companyFontSize: { value: "", error: false },
-    //   logoUrl: { value: "", error: false, fileName: "" },
-    // });
-    // const [boxShadow, setBoxShadow] = useState({
-    //   0: "0px",
-    //   1: "0px",
-    //   2: "0px",
-    //   3: "0px",
-    // });
+
+
     const handleChange = (v, name) => {
       setSettingState((prev) => ({
         ...prev,
@@ -97,20 +83,12 @@ const InputSections = forwardRef(
     useEffect(() => {
       // console.log("setingstate", settingState);
     }, [settingState]);
-    const b = {};
-    Object.keys(boxShadow)
-      .sort((a, b) => {
-        return +a - +b;
-      })
-      .forEach((x) => {
-        b[x] = boxShadow[x];
-      });
-    const updatedShadow = `${Object.values(b).join(" ")} ${shadowColor?.hex}`;
+
     return (
       <Grid container component={Paper} className="settings">
         <form ref={ref} className="form">
           <Typography variant="h5">Settings</Typography>
-          <Grid container spacing={2} className="main">
+          <Grid container spacing={2} className="main no-cursor">
             <Grid {...styles}>
               <FontPicker
                 className="font-selector"
@@ -124,11 +102,12 @@ const InputSections = forwardRef(
                 fullWidth
                 displayEmpty
                 variant="standard"
-                className="h-55 mb-20 clr-gray"
+                className="h-55 mb-20 clr-gray pooooooooooooo"
                 onOpen={() => setShow("font")}
                 renderValue={() => <p className="ml-15">Font colour</p>}
                 onClose={onClose}
                 name="fontColor"
+                value={settingState.fontColor.value.hex || ''}
                 error={settingState.fontColor.error}
                 onBlur={errorHandler}
               />
@@ -184,6 +163,7 @@ const InputSections = forwardRef(
                 onOpen={() => setShow("primary")}
                 onClose={onClose}
                 type="number"
+                value={settingState.primaryColor.value.hex || ''}
                 name="primaryColor"
                 style={{}}
                 onBlur={errorHandler}
@@ -205,6 +185,7 @@ const InputSections = forwardRef(
                 onOpen={() => setShow("secondary")}
                 onClose={onClose}
                 name="secondaryColor"
+                value={settingState.secondaryColor.value.hex || ''}
                 variant="standard"
                 onBlur={errorHandler}
               />
@@ -236,17 +217,17 @@ const InputSections = forwardRef(
                   <Fade {...TransitionProps} timeout={350}>
                     <Paper className="shadow-picker">
                       <div>
-                        {["", "", "", ""].map((_, i) => (
-                          <input
+                        {["offset-x", "offset-x", "blur-radius", "spread-radius"].map((v, i) => (
+                          <><label className="mb-10">{v}</label> <input
                             key={i}
-                            type="range"
-                            className="pb-16"
+                            type='range'
+                            // className="pb-16"
                             name={i}
-                            onChange={handledropShadow}
+                            onDragEnd={handledropShadow}
                             min="-10"
                             max="10"
                             value={+boxShadow[i].replace("px", "")}
-                          />
+                          /></>
                         ))}
                       </div>
                       <ChromePicker

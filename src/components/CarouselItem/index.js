@@ -47,7 +47,7 @@ function CarouselItem({ details, selectedStyle }) {
           <div className="blue">
             <h5>{details.presenterName.value}</h5>
           </div>
-          <div className="">{"sdaaaaaaaaaaa"}</div>
+          <div className="">{""}</div>
         </div>
       </div>
       <div
