@@ -1,4 +1,4 @@
-import { img } from "./components/CarouselItem";
+// import { img } from "./components/CarouselItem";
 import RandomLogo from "../src/assets/RandomLogo.svg";
 export const formInputs = [
   {
@@ -69,30 +69,29 @@ export const styles = [
       onClick,
       details
     ) => {
-      console.log("font", font, secondaryColor, primaryColor);
       return (
         <div
-          id="0"
           className={`main pr-5 ${selectedStyle === 0 && " border"}`}
-          onClick={onClick}
-          style={{ fontFamily: font?.value, boxShadow }}
+          onClick={() => onClick(0)}
+          style={{ fontFamily: font.value, boxShadow }}
         >
           <div
+            id="0"
             className="blue first"
             style={{
-              backgroundColor: secondaryColor?.value,
-              color: fontColor?.value,
+              backgroundColor: secondaryColor.value,
+              color: fontColor.value,
             }}
           >
-            <h5 style={{ fontSize: presenterFontSize?.value }}>
+            <h5 style={{ fontSize: presenterFontSize.value }}>
               {details.presenterName}
             </h5>
           </div>
           <div
             className="red"
             style={{
-              backgroundColor: primaryColor?.value,
-              fontSize: companyFontSize?.value,
+              backgroundColor: primaryColor.value,
+              fontSize: companyFontSize.value,
             }}
           >
             {details.company}
@@ -105,7 +104,7 @@ export const styles = [
     div: (
       {
         font,
-        // secondaryColor,
+        secondaryColor,
         primaryColor,
         fontColor,
         presenterFontSize,
@@ -118,36 +117,38 @@ export const styles = [
       details
     ) => (
       <div
-        id="1"
-        className={`row ${selectedStyle === 1 && " border"}`}
+        className={`main row ${selectedStyle == 1 && " border"}`}
         onClick={() => onClick(1)}
         style={{
-          fontFamily: font?.value,
+          fontFamily: font.value,
           boxShadow,
-          color: fontColor?.value,
+          color: fontColor.value,
         }}
       >
-        <div className="second-inner">
+        <div className="second-inner" id="1">
           <img
-            src={logoUrl?.value || RandomLogo}
+            src={logoUrl.value || RandomLogo}
             style={{
-              border: `1px solid ${primaryColor?.value}`,
-              color: font?.value,
+              border: `1px solid ${primaryColor.value}`,
+              color: font.value,
             }}
             className="secondlogo"
             alt="llll"
           />
-          <div className="secondtext">
+          <div
+            className="secondtext"
+            style={{ backgroundColor: secondaryColor.value }}
+          >
             <h3
               style={{
-                fontSize: presenterFontSize?.value,
+                fontSize: presenterFontSize.value,
               }}
             >
               {details.presenterName}
             </h3>
             <p
               style={{
-                fontSize: companyFontSize?.value,
+                fontSize: companyFontSize.value,
               }}
             >
               {details.company}
@@ -172,24 +173,24 @@ export const styles = [
       details
     ) => (
       <div
-        id="2"
+        onClick={() => onClick(2)}
         style={{
           minWidth: "50%",
-          color: fontColor?.value,
-          fontFamily: font?.value,
+          color: fontColor.value,
+          fontFamily: font.value,
           boxShadow,
         }}
-        onClick={() => onClick(2)}
-        className={`pr-5 ${selectedStyle === 2 && " border"}`}
+        className={`pr-5 ${selectedStyle == 2 && " border"}`}
       >
         <div
-          style={{ backgroundColor: secondaryColor?.value }}
-          className="main border bg-red h-95"
+          id="2"
+          style={{ backgroundColor: secondaryColor.value }}
+          className="main border bg-red h-50px"
         >
-          <h2 style={{ fontSize: presenterFontSize?.value }}>
+          <h2 style={{ fontSize: presenterFontSize.value }}>
             {details.presenterName}
           </h2>
-          <p style={{ fontSize: companyFontSize?.value }}>{details.company}</p>
+          <p style={{ fontSize: companyFontSize.value }}>{details.company}</p>
         </div>
       </div>
     ),
@@ -210,15 +211,34 @@ export const styles = [
       details
     ) => (
       <div
-        id="3"
-        className={`main relative ${selectedStyle === 3 && " border"}`}
-        onClick={onClick}
-        style={{ height: "50px", fontFamily: font?.value, boxShadow }}
+        className={`main relative ${selectedStyle == 3 && " border"}`}
+        onClick={() => onClick(3)}
+        style={{
+          height: "50px",
+          fontFamily: font.value,
+          boxShadow,
+          color7: fontColor.value,
+        }}
       >
-        <div className="blue first">
+        <div
+          id="3"
+          className="blue first"
+          style={{
+            backgroundColor: secondaryColor.value,
+            fontSize: presenterFontSize.value,
+          }}
+        >
           <h5>{details.presenterName}</h5>
         </div>
-        <div className="red red-four">{details.company}</div>
+        <div
+          className="red red-four"
+          style={{
+            backgroundColor: primaryColor.value,
+            fontSize: companyFontSize.value,
+          }}
+        >
+          {details.company}
+        </div>
       </div>
     ),
   },
@@ -239,15 +259,25 @@ export const styles = [
     ) => (
       <div
         id="4"
-        style={{ minWidth: "50%", fontFamily: font?.value, boxShadow }}
-        onClick={onClick}
-        className={`pr-5 ${selectedStyle === 4 && " border"}`}
+        onClick={() => onClick(4)}
+        style={{
+          minWidth: "50%",
+          fontFamily: font.value,
+          boxShadow,
+          color: fontColor.value,
+          backgroundColor: secondaryColor.value,
+        }}
+        className={`main pr-5 ${selectedStyle == 4 && " border"}`}
       >
-        <div className="main five pr-5" style={{}}>
-          <div className="blue">
-            <h5>{details.presenterName}</h5>
+        <div className="five pr-5">
+          <div className="blue" style={{ backgroundColor: primaryColor.value }}>
+            <h5 style={{ fontSize: presenterFontSize.value }}>
+              {details.presenterName}
+            </h5>
           </div>
-          <div className="">{details.company}</div>
+          <div style={{ fontSize: companyFontSize.value }}>
+            {details.company}
+          </div>
         </div>
       </div>
     ),
@@ -270,22 +300,31 @@ export const styles = [
     ) => (
       <div
         id="5"
-        className={`main ${selectedStyle === 5 && " border"}`}
+        className={`main ${selectedStyle == 5 && " border"}`}
         style={{
-          fontFamily: font?.value,
+          fontFamily: font.value,
           boxShadow,
+          color: fontColor.value,
         }}
-        onClick={onClick}
+        onClick={() => onClick(5)}
       >
-        <div className="second-inner bg-red">
+        <div
+          className="second-inner bg-red"
+          style={{ backgroundColor: primaryColor.value }}
+        >
           <img
-            src={logoUrl?.value || RandomLogo}
+            src={logoUrl.value || RandomLogo}
             className="secondlogo"
             alt=""
           />
-          <div className="secondtext" style={{}}>
-            <h3>{details.presenterName}</h3>
-            <p>{details.company}</p>
+          <div
+            className="secondtext"
+            style={{ backgroundColor: secondaryColor.value }}
+          >
+            <h3 style={{ fontSize: presenterFontSize.value }}>
+              {details.presenterName}
+            </h3>
+            <p style={{ fontSize: companyFontSize.value }}>{details.company}</p>
           </div>
         </div>
       </div>

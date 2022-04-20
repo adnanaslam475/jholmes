@@ -15,7 +15,7 @@ import {
 import { formInputs } from "../../constants";
 import Warning from "../Warning";
 
-const UserInformationForm = forwardRef(({ open, onClose }, ref) => {
+const UserInformationForm = forwardRef(({ open, onClose,submit }, ref) => {
   const formref = useRef();
   const [form, setForm] = useState({
     firstName: "",
@@ -43,6 +43,7 @@ const UserInformationForm = forwardRef(({ open, onClose }, ref) => {
       onClose();
       formref.current.reset();
       localStorage.setItem("user", JSON.stringify(form));
+      submit();
     }
   };
   return (

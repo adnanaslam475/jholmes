@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { isEmpty } from "lodash";
 import { toPng } from "html-to-image";
-// import  download from "downloadjs";
+import downloadImg from "downloadjs"; // downloadImg(dataUrl, "aaa.png");
 import { detailsInputs } from "../constants";
 import ResCarousel from "../components/Carousel";
 import UserInformationForm from "../components/UserInformationForm";
@@ -22,7 +22,7 @@ const DownloadSection = forwardRef(
       company: { value: "", error: false },
     });
     const [selectedStyle, setSelectedStyle] = useState({});
-    const [add, setadd] = useState([]);
+    const [assets, setAssets] = useState([]);
     const [open, setOpen] = useState(false);
     const handleChange = (e) => {
       setDetails((prev) => ({
@@ -31,18 +31,22 @@ const DownloadSection = forwardRef(
       }));
     };
     const onBlur = () => {};
-    const submit = (e) => {
+    const download = (e) => {
       e.preventDefault();
-      setadd([...add, details]);
-      ref.current.reset();
+      if (isEmpty(localStorage.getItem("user"))) {
+        setOpen(true);
+      } else {
+        assets.forEach((v) => downloadImg(v, "aaa.png"));
+      }
     };
-    const download = async () => {
+    const saveAsset = async (e) => {
+      e.preventDefault();
       try {
         const dataUrl = await toPng(document.getElementById(selectedStyle));
         var img = new Image();
         img.src = dataUrl;
-        document.body.appendChild(img);
-        download(dataUrl, "aaa.png");
+        // document.body.appendChild(img);
+
         console.log("yeimage", img);
       } catch (error) {
         console.log("errrtoconvert", error);
@@ -68,45 +72,39 @@ const DownloadSection = forwardRef(
                 />
               </Grid>
             ))}
-            <ResCarousel
-              details={{
-                presenterName: details.presenterName.value,
-                company: details.company.value,
-              }}
-              selectedStyle={selectedStyle}
-              boxShadow={updatedShadow}
-              setSelectedStyle={setSelectedStyle}
-              settingState={settingState}
-            />
-            <Button
-              onClick={submit}
-              variant="contained"
-              type="submit"
-              className="upload-btn save-btn"
-            >
-              Save
-            </Button>
+            <div className="carousel-cont">
+              <ResCarousel
+                details={{
+                  presenterName: details.presenterName.value,
+                  company: details.company.value,
+                }}
+                selectedStyle={selectedStyle}
+                boxShadow={updatedShadow}
+                setSelectedStyle={setSelectedStyle}
+                settingState={settingState}
+                style
+              />
+              <Button
+                onClick={saveAsset}
+                variant="contained"
+                type="submit"
+                className="upload-btn save-btn"
+              >
+                Save
+              </Button>
+            </div>
             <Typography variant="h6">Assets</Typography>
-            <ResCarousel
-              details={{
-                presenterName: details.presenterName.value,
-                company: details.company.value,
-              }}
-              selectedStyle={selectedStyle}
-            />
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                return isEmpty(localStorage.getItem("user"))
-                  ? setOpen(true)
-                  : downloadAssets;
-              }}
-              variant="contained"
-              type="submit"
-              className="upload-btn save-btn"
-            >
-              Download
-            </Button>
+            <div className="carousel-cont">
+              <ResCarousel assets={assets} />
+              <Button
+                onClick={download}
+                variant="contained"
+                type="submit"
+                className="upload-btn save-btn"
+              >
+                Download
+              </Button>
+            </div>
           </Grid>
         </form>
         <UserInformationForm onClose={() => setOpen(false)} open={open} />

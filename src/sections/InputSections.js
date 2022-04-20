@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { isEmpty } from "lodash";
 import FontPicker from "font-picker-react";
-import { SwatchesPicker, ChromePicker, } from "react-color";
+import { SwatchesPicker, ChromePicker } from "react-color";
 
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 // import { dropinputs } from "../constants";
@@ -120,7 +120,9 @@ const InputSections = forwardRef(
                 <SwatchesPicker
                   color={settingState.fontColor.value}
                   className="color-picker mb-20"
-                  onChangeComplete={(value) => handleChange(value.hex, "fontColor")}
+                  onChangeComplete={(value) =>
+                    handleChange(value.hex, "fontColor")
+                  }
                 />
               )}
             </Grid>
@@ -192,7 +194,9 @@ const InputSections = forwardRef(
               />
               {show === "secondary" && (
                 <SwatchesPicker
-                  onChangeComplete={(v) => handleChange(v.hex, "secondaryColor")}
+                  onChangeComplete={(v) =>
+                    handleChange(v.hex, "secondaryColor")
+                  }
                   color={settingState.secondaryColor.value}
                   className="color-picker"
                 />
@@ -251,11 +255,11 @@ const InputSections = forwardRef(
                   </Fade>
                 )}
               </Popper>
-              <div
-                onClick={handleOpenDropShadow}
-                style={{ backgroundColor: shadowColor?.hex || shadowColor }}
-                className={`${"drop-shadow"}`}
-              ></div>
+                <div
+                  onClick={handleOpenDropShadow}
+                  style={{ backgroundColor: shadowColor?.hex || shadowColor }}
+                  className={`${"drop-shadow"}`}
+                ></div>
               <span>Drop Shadow</span>
             </Grid>
           </Grid>
