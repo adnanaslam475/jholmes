@@ -13,7 +13,7 @@ function App() {
     secondaryColor: { value: "", error: false },
     presenterFontSize: { value: "", error: false },
     companyFontSize: { value: "", error: false },
-    logoUrl: { value: logo, error: false, fileName: logo.split("/").pop() },
+    logoUrl: { value: logo, error: false, fileName: logo?.split("/").pop() },
   });
   const [shadowColor, setShadowColor] = useState("gray");
   const [boxShadow, setBoxShadow] = useState({
@@ -43,7 +43,6 @@ function App() {
             setBoxShadow={setBoxShadow}
             setShadowColor={setShadowColor}
             shadowColor={shadowColor}
-            // updatedShadow={updatedShadow}
             setSettingState={setSettingState}
           />
         </Grid>

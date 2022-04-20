@@ -8,6 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import { isEmpty } from "lodash";
+import { toPng } from "html-to-image";
+// import  download from "downloadjs";
 import { detailsInputs } from "../constants";
 import ResCarousel from "../components/Carousel";
 import UserInformationForm from "../components/UserInformationForm";
@@ -28,11 +30,23 @@ const DownloadSection = forwardRef(
         [e.target.name]: { error: false, value: e.target.value },
       }));
     };
-    const onBlur = () => { };
+    const onBlur = () => {};
     const submit = (e) => {
       e.preventDefault();
       setadd([...add, details]);
       ref.current.reset();
+    };
+    const download = async () => {
+      try {
+        const dataUrl = await toPng(document.getElementById(selectedStyle));
+        var img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+        download(dataUrl, "aaa.png");
+        console.log("yeimage", img);
+      } catch (error) {
+        console.log("errrtoconvert", error);
+      }
     };
     return (
       <Grid container component={Paper} className="downloads">
@@ -57,7 +71,7 @@ const DownloadSection = forwardRef(
             <ResCarousel
               details={{
                 presenterName: details.presenterName.value,
-                company: details.company.value
+                company: details.company.value,
               }}
               selectedStyle={selectedStyle}
               boxShadow={updatedShadow}
@@ -65,7 +79,7 @@ const DownloadSection = forwardRef(
               settingState={settingState}
             />
             <Button
-              onClick={() => submit()}
+              onClick={submit}
               variant="contained"
               type="submit"
               className="upload-btn save-btn"
@@ -73,7 +87,13 @@ const DownloadSection = forwardRef(
               Save
             </Button>
             <Typography variant="h6">Assets</Typography>
-            {/* <ResCarousel details={details} selectedStyle={selectedStyle} /> */}
+            <ResCarousel
+              details={{
+                presenterName: details.presenterName.value,
+                company: details.company.value,
+              }}
+              selectedStyle={selectedStyle}
+            />
             <Button
               onClick={(e) => {
                 e.preventDefault();

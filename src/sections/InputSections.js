@@ -244,7 +244,6 @@ const InputSections = forwardRef(
                         color={shadowColor}
                         onChangeComplete={(v) => {
                           setShadowColor(v);
-                          console.log("onChangeComplete");
                         }}
                         className="min-200"
                       />
