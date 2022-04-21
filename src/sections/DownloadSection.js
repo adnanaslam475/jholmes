@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { isEmpty } from "lodash";
-import { toPng } from "html-to-image";
+import { toPng, toSvg, toCanvas } from "html-to-image";
 import downloadImg from "downloadjs"; // downloadImg(dataUrl, "aaa.png");
-import { detailsInputs } from "../constants";
+import { assetStyles, detailsInputs } from "../constants";
 import ResCarousel from "../components/Carousel";
 import UserInformationForm from "../components/UserInformationForm";
 
@@ -21,7 +21,7 @@ const DownloadSection = forwardRef(
       presenterName: { value: "", error: false },
       company: { value: "", error: false },
     });
-    const [selectedStyle, setSelectedStyle] = useState({});
+    const [selectedStyle, setSelectedStyle] = useState(null);
     const [assets, setAssets] = useState([]);
     const [open, setOpen] = useState(false);
     const handleChange = (e) => {
@@ -41,17 +41,20 @@ const DownloadSection = forwardRef(
     };
     const saveAsset = async (e) => {
       e.preventDefault();
+      console.log(document.getElementById(selectedStyle).firstChild);
       try {
-        const dataUrl = await toPng(document.getElementById(selectedStyle));
+        const el = document.getElementById(selectedStyle);
+        el.classList.remove("border");
+        const dataUrl = await toPng(el);
         var img = new Image();
         img.src = dataUrl;
-        // document.body.appendChild(img);
-
-        console.log("yeimage", img);
+        document.getElementById("assets").appendChild(img);
+        console.log("yeimage", img, document.getElementById("assets"));
       } catch (error) {
         console.log("errrtoconvert", error);
       }
     };
+    const onClick = (e) => setSelectedStyle(e);
     return (
       <Grid container component={Paper} className="downloads">
         <form ref={ref}>
@@ -79,13 +82,15 @@ const DownloadSection = forwardRef(
                   company: details.company.value,
                 }}
                 selectedStyle={selectedStyle}
-                boxShadow={updatedShadow}
+                updatedShadow={updatedShadow}
                 setSelectedStyle={setSelectedStyle}
                 settingState={settingState}
                 style
               />
+
               <Button
                 onClick={saveAsset}
+                disabled={selectedStyle === null}
                 variant="contained"
                 type="submit"
                 className="upload-btn save-btn"
@@ -95,7 +100,7 @@ const DownloadSection = forwardRef(
             </div>
             <Typography variant="h6">Assets</Typography>
             <div className="carousel-cont">
-              <ResCarousel assets={assets} />
+              <ResCarousel assets={true} />
               <Button
                 onClick={download}
                 variant="contained"

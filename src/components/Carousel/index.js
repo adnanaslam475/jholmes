@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
-import { styles } from "../../constants";
+import { assetStyles } from "../../constants";
 const ResCarousel = ({
   details,
   selectedStyle,
@@ -9,7 +9,7 @@ const ResCarousel = ({
   boxShadow,
   settingState,
   style,
-  assets = [],
+  assets,
 }) => {
   const onClick = (e) => setSelectedStyle(e);
 
@@ -23,7 +23,7 @@ const ResCarousel = ({
       >
         {style && (
           <div id="style-1" className="carousel-main all-border scroll">
-            {styles.map((v) => (
+            {assetStyles.map((v) => (
               <>
                 {v.div(
                   { ...settingState, selectedStyle, boxShadow },
@@ -35,10 +35,10 @@ const ResCarousel = ({
           </div>
         )}
         {assets && (
-          <div>
-            {assets.map((v) => (
+          <div id="assets" className="main">
+            {/* {assets.map((v) => (
               <>{v}</>
-            ))}
+            ))} */}
           </div>
         )}
       </Carousel>

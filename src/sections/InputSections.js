@@ -227,7 +227,6 @@ const InputSections = forwardRef(
                           "blur-radius",
                           "spread-radius",
                         ].map((v, i) => {
-                          console.log(+boxShadow[i].replace("px", ""));
                           return (
                             <>
                               <label className="mb-10">{v}</label>{" "}
@@ -236,8 +235,8 @@ const InputSections = forwardRef(
                                 type="range"
                                 name={i}
                                 onChange={handledropShadow}
-                                min="-10"
-                                max="10"
+                                min="-20"
+                                max="20"
                                 value={+boxShadow[i].replace("px", "")}
                               />
                             </>

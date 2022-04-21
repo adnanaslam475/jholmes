@@ -1,4 +1,3 @@
-// import { img } from "./components/CarouselItem";
 import RandomLogo from "../src/assets/RandomLogo.svg";
 export const formInputs = [
   {
@@ -53,7 +52,7 @@ export const detailsInputs = [
   },
 ];
 
-export const styles = [
+export const assetStyles = [
   {
     div: (
       {
@@ -71,30 +70,39 @@ export const styles = [
     ) => {
       return (
         <div
-          className={`main pr-5 ${selectedStyle === 0 && " border"}`}
-          onClick={() => onClick(0)}
-          style={{ fontFamily: font.value, boxShadow }}
+          style={{ minWidth: "50%" }}
+          id="0"
+          className={`${selectedStyle === 0 && " border"}`}
         >
+          {" "}
           <div
-            id="0"
-            className="blue first"
+            className={`main ${selectedStyle === 0 && ""}`}
+            onClick={() => onClick(0)}
             style={{
-              backgroundColor: secondaryColor.value,
+              fontFamily: font.value,
+              boxShadow,
               color: fontColor.value,
             }}
           >
-            <h5 style={{ fontSize: presenterFontSize.value }}>
-              {details.presenterName}
-            </h5>
-          </div>
-          <div
-            className="red"
-            style={{
-              backgroundColor: primaryColor.value,
-              fontSize: companyFontSize.value,
-            }}
-          >
-            {details.company}
+            <div
+              className="blue first"
+              style={{
+                backgroundColor: secondaryColor.value,
+              }}
+            >
+              <h5 style={{ fontSize: presenterFontSize.value }}>
+                {details.presenterName}
+              </h5>
+            </div>
+            <div
+              className="red"
+              style={{
+                backgroundColor: primaryColor.value,
+                fontSize: companyFontSize.value,
+              }}
+            >
+              {details.company}
+            </div>
           </div>
         </div>
       );
@@ -121,16 +129,14 @@ export const styles = [
         onClick={() => onClick(1)}
         style={{
           fontFamily: font.value,
-          boxShadow,
           color: fontColor.value,
-        }}
+        }} id="1"
       >
-        <div className="second-inner" id="1">
+        <div className="second-inner"style={{boxShadow}}>
           <img
             src={logoUrl.value || RandomLogo}
             style={{
               border: `1px solid ${primaryColor.value}`,
-              color: font.value,
             }}
             className="secondlogo"
             alt="llll"
