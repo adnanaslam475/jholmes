@@ -8,8 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { isEmpty } from "lodash";
+import { Carousel } from "react-responsive-carousel";
 import { toPng, toSvg, toCanvas } from "html-to-image";
-import downloadImg from "downloadjs"; // downloadImg(dataUrl, "aaa.png");
+import downloadImg from "downloadjs";
 import { assetStyles, detailsInputs } from "../constants";
 import ResCarousel from "../components/Carousel";
 import UserInformationForm from "../components/UserInformationForm";
@@ -17,12 +18,12 @@ import UserInformationForm from "../components/UserInformationForm";
 const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
 const DownloadSection = forwardRef(
   ({ downloadAssets, updatedShadow, settingState }, ref) => {
+    const [assets, setAssets] = useState([]);
     const [details, setDetails] = useState({
       presenterName: { value: "", error: false },
       company: { value: "", error: false },
     });
     const [selectedStyle, setSelectedStyle] = useState(null);
-    const [assets, setAssets] = useState([]);
     const [open, setOpen] = useState(false);
     const handleChange = (e) => {
       setDetails((prev) => ({
@@ -48,13 +49,18 @@ const DownloadSection = forwardRef(
         const dataUrl = await toPng(el);
         var img = new Image();
         img.src = dataUrl;
-        document.getElementById("assets").appendChild(img);
-        console.log("yeimage", img, document.getElementById("assets"));
+        img.className = el.className;
+        const assetsEl = document.getElementById("assets");
+        if (document.getElementById("assets").childNodes.length >= 6) {
+        } else {
+          document.getElementById("assets").appendChild(img);
+        }
+        console.log("yeimage", img, el);
       } catch (error) {
         console.log("errrtoconvert", error);
       }
     };
-    const onClick = (e) => setSelectedStyle(e);
+    console.log("updateshaow", updatedShadow);
     return (
       <Grid container component={Paper} className="downloads">
         <form ref={ref}>
@@ -82,12 +88,11 @@ const DownloadSection = forwardRef(
                   company: details.company.value,
                 }}
                 selectedStyle={selectedStyle}
-                updatedShadow={updatedShadow}
+                boxShadow={updatedShadow}
                 setSelectedStyle={setSelectedStyle}
                 settingState={settingState}
                 style
               />
-
               <Button
                 onClick={saveAsset}
                 disabled={selectedStyle === null}
@@ -100,15 +105,27 @@ const DownloadSection = forwardRef(
             </div>
             <Typography variant="h6">Assets</Typography>
             <div className="carousel-cont">
-              <ResCarousel assets={true} />
-              <Button
-                onClick={download}
-                variant="contained"
-                type="submit"
-                className="upload-btn save-btn"
-              >
-                Download
-              </Button>
+              <Grid container>
+                <Carousel
+                  showArrows
+                  showThumbs={false}
+                  width="100%"
+                  className="carousel-main h-250px"
+                >
+                  <div
+                    id="assets"
+                    className="carousel-main all-border scroll"
+                  ></div>
+                </Carousel>
+                <Button
+                  onClick={download}
+                  variant="contained"
+                  type="submit"
+                  className="upload-btn save-btn"
+                >
+                  Download
+                </Button>
+              </Grid>
             </div>
           </Grid>
         </form>

@@ -8,8 +8,6 @@ const ResCarousel = ({
   setSelectedStyle,
   boxShadow,
   settingState,
-  style,
-  assets,
 }) => {
   const onClick = (e) => setSelectedStyle(e);
 
@@ -21,26 +19,17 @@ const ResCarousel = ({
         width="100%"
         className="carousel-main h-250px"
       >
-        {style && (
-          <div id="style-1" className="carousel-main all-border scroll">
-            {assetStyles.map((v) => (
-              <>
-                {v.div(
-                  { ...settingState, selectedStyle, boxShadow },
-                  onClick,
-                  details
-                )}
-              </>
-            ))}
-          </div>
-        )}
-        {assets && (
-          <div id="assets" className="main">
-            {/* {assets.map((v) => (
-              <>{v}</>
-            ))} */}
-          </div>
-        )}
+        <div id="style-1" className="carousel-main all-border scroll">
+          {assetStyles.map((v) => (
+            <>
+              {v.div(
+                { ...settingState, selectedStyle, boxShadow },
+                onClick,
+                details
+              )}
+            </>
+          ))}
+        </div>
       </Carousel>
     </Grid>
   );
