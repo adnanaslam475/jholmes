@@ -132,7 +132,7 @@ export const assetStyles = [
           color: fontColor.value,
         }} id="1"
       >
-        <div className="second-inner"style={{boxShadow}}>
+        <div className="second-inner" style={{ boxShadow }}>
           <img
             src={logoUrl.value || RandomLogo}
             style={{
@@ -223,7 +223,7 @@ export const assetStyles = [
           height: "50px",
           fontFamily: font.value,
           boxShadow,
-          color7: fontColor.value,
+          color: fontColor.value,
         }}
       >
         <div
