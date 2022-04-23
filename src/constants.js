@@ -316,7 +316,7 @@ export const assetStyles = [
       >
         <div
           className="second-inner bg-red"
-          style={{ backgroundColor: primaryColor.value }}
+          style={{ backgroundColor: primaryColor.value, alignItems:'initial' }}
         >
           <img
             src={logoUrl.value || RandomLogo}

@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { saveAs } from 'file-saver'
+import { saveAs } from "file-saver";
 import { isEmpty } from "lodash";
 import { Carousel } from "react-responsive-carousel";
 import { toPng, toSvg, toCanvas } from "html-to-image";
@@ -16,12 +16,16 @@ import downloadImg from "downloadjs";
 import { detailsInputs } from "../constants";
 import ResCarousel from "../components/Carousel";
 import UserInformationForm from "../components/UserInformationForm";
+import domtoimage from "dom-to-image";
+// function getFilename(url) {
+//   return url.substr(url.lastIndexOf("/") + 1);
+// }
 
 const styles = { item: true, md: 6, lg: 6, xs: 12, sm: 6, xl: 6 };
 const DownloadSection = forwardRef(
   ({ downloadAssets, updatedShadow, settingState }, ref) => {
     const [assets, setAssets] = useState([]);
-    const a = useRef(null)
+    const a = useRef(null);
     const [details, setDetails] = useState({
       presenterName: { value: "", error: false },
       company: { value: "", error: false },
@@ -34,31 +38,33 @@ const DownloadSection = forwardRef(
         [e.target.name]: { error: false, value: e.target.value },
       }));
     };
-    const onBlur = () => { };
+    const onBlur = () => {};
 
     const saveAsset = async (e) => {
       e.preventDefault();
       try {
         const el = document.getElementById(selectedStyle);
         el.classList.remove("border");
-        const dataUrl = await toPng(el);
+        // const dataUrl = await toPng(el);
+        // const dataUrl = await toCanvas(el);
+        const dataUrl = await toSvg(el);
         var img = new Image();
         img.src = dataUrl;
-        img.className = 'assets-images'
-        const assetsEl = document.getElementById("assets");
-        // downloadImg(img, 'asssss.png', 'image/png')
-        if (document.getElementById("assets").childNodes.length >= 6) {
-        } else {
-          document.getElementById("assets").appendChild(img);
-        }
-        if (a.current.props.children[a.current.props.children.length - 1].props.children.length >= 6) {
-
-        }
+        img.className = "assets-images";
+        document.getElementById("assets").appendChild(img);
+        setSelectedStyle(null)
+        // if (document.getElementById("assets").childNodes?.length >= 6) {
+        // } else {
+        // }
+        // if (
+        //   a.current.props.children[a.current.props.children.length - 1].props
+        //     .children.length >= 6
+        // ) {
+        // }
       } catch (error) {
         console.log("errrtoconvert", error);
       }
     };
-
 
     const download = async (e) => {
       try {
@@ -66,28 +72,33 @@ const DownloadSection = forwardRef(
         if (isEmpty(localStorage.getItem("user"))) {
           setOpen(true);
         } else {
+          let images = [];
           let zip = new JSZip();
-          let photoZip = zip.folder(`images`);
-          const all = document.querySelectorAll('.assets-images')
-          for (let i = 0; i < all.length; i++) {
-            let blob = new Blob([all[i].src], { type: 'image/png' })
-            let url = URL.createObjectURL(blob);
-            // let img = new Image();
-            // img.src = url;
-            console.log('blb', blob, url)
-            photoZip.file(Math.random(), blob)
+          let all = document.getElementById("assets").childNodes;
+          for (const file of all) {
+            images.push(await domtoimage.toBlob(file));
           }
-          zip.generateAsync({ type: "blob" })
+          for (let i = 0; i < images.length; i++) {
+            zip.file(
+              `${Math.random().toString(36).substring(2, 11)}.png`,
+              images[i],
+              {
+                binary: true,
+              }
+            );
+          }
+          zip
+            .generateAsync({ type: "blob" })
             .then(function (content) {
-              saveAs(content, 'zipimages');
-            });
+              saveAs(content, "zipimages");
+            })
+            .catch((err) => console.log("errinzip", err));
         }
       } catch (error) {
-        console.log('errorinconvet', error)
+        console.log("doenlaod_err:", error);
       }
     };
 
-    console.log(document.querySelectorAll('.assets-images'))
     return (
       <Grid container component={Paper} className="downloads">
         <form ref={ref}>
@@ -130,7 +141,9 @@ const DownloadSection = forwardRef(
                 Save
               </Button>
             </div>
-            <Typography variant="h6">Assets</Typography>
+            <Typography variant="h6" className="ml-10">
+              Assets
+            </Typography>
             <div className="carousel-cont">
               <Grid container>
                 <Carousel
@@ -138,20 +151,26 @@ const DownloadSection = forwardRef(
                   ref={a}
                   showThumbs={false}
                   width="100%"
-                  id='assets-carousel'
+                  id="assets-carousel"
                   className="carousel-main h-250px"
                 >
                   <div
                     id="assets"
-                    style={{ border: '1px solid red' }}
+                    // style={{ border: "1px solid red" }}
                     className="carousel-main all-border scroll"
-                  >
+                  ></div>
+                  <div id="assets2" className="carousel-main all-border scroll">
+                    <p></p>
+                    <h1></h1>
                   </div>
-                  <div
-                    id="assets2"
-                    style={{ border: '1px solid blue' }}
-                    className="carousel-main all-border scroll"
-                  ><p></p><h1></h1></div>
+                  <div id="assets2" className="carousel-main all-border scroll">
+                    <p></p>
+                    <h1></h1>
+                  </div>
+                  <div id="assets2" className="carousel-main all-border scroll">
+                    <p></p>
+                    <h1></h1>
+                  </div>
                 </Carousel>
                 <Button
                   onClick={download}

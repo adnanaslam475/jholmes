@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { Button } from "@mui/material";
 
 class CloudinaryUploadWidget extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     var myWidget = window.cloudinary.createUploadWidget(
       {
         cloudName: "mernapp",
         uploadPreset: "ml_default",
+        // api_key:''
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
@@ -14,6 +18,7 @@ class CloudinaryUploadWidget extends Component {
         }
       }
     );
+
     document.getElementById("upload_widget").addEventListener(
       "click",
       function () {
@@ -22,11 +27,9 @@ class CloudinaryUploadWidget extends Component {
       false
     );
   }
-  componentDidCatch() {
-    console.log("catcahcaca");
-  }
 
   render() {
+    console.log("props", this.props);
     return (
       <Button
         fullWidth
