@@ -45,22 +45,23 @@ const DownloadSection = forwardRef(
       try {
         const el = document.getElementById(selectedStyle);
         el.classList.remove("border");
-        // const dataUrl = await toPng(el);
+        const dataUrl = await toPng(el);
         // const dataUrl = await toCanvas(el);
-        const dataUrl = await toSvg(el);
+        // const dataUrl = await toSvg(el);
         var img = new Image();
         img.src = dataUrl;
         img.className = "assets-images";
-        document.getElementById("assets").appendChild(img);
-        setSelectedStyle(null)
-        // if (document.getElementById("assets").childNodes?.length >= 6) {
-        // } else {
-        // }
-        // if (
-        //   a.current.props.children[a.current.props.children.length - 1].props
-        //     .children.length >= 6
-        // ) {
-        // }
+        setSelectedStyle(null);
+        if (document.getElementById("assets").childNodes?.length >= 50) {
+          console.log("above50");
+        } else {
+          document.getElementById("assets").appendChild(img);
+        }
+        if (
+          a.current.props.children[a.current.props.children.length - 1].props
+            .children.length >= 6
+        ) {
+        }
       } catch (error) {
         console.log("errrtoconvert", error);
       }
@@ -76,7 +77,9 @@ const DownloadSection = forwardRef(
           let zip = new JSZip();
           let all = document.getElementById("assets").childNodes;
           for (const file of all) {
-            images.push(await domtoimage.toBlob(file));
+            images.push(
+              await domtoimage.toBlob(file, { quality: "0.99", style: {} })
+            );
           }
           for (let i = 0; i < images.length; i++) {
             zip.file(
@@ -104,7 +107,6 @@ const DownloadSection = forwardRef(
         <form ref={ref}>
           <Typography variant="h5">Details</Typography>
           <Grid container spacing={2} className="">
-            {/* <input type={'image'} /> */}
             {detailsInputs.map((v, i) => (
               <Grid {...styles} key={i}>
                 <TextField
@@ -156,18 +158,18 @@ const DownloadSection = forwardRef(
                 >
                   <div
                     id="assets"
-                    // style={{ border: "1px solid red" }}
+                    style={{ border: "1px solid red", height: "370px" }}
                     className="carousel-main all-border scroll"
                   ></div>
-                  <div id="assets2" className="carousel-main all-border scroll">
+                  <div id="assets2" className="">
                     <p></p>
                     <h1></h1>
                   </div>
-                  <div id="assets2" className="carousel-main all-border scroll">
+                  <div id="assets2" className="">
                     <p></p>
                     <h1></h1>
                   </div>
-                  <div id="assets2" className="carousel-main all-border scroll">
+                  <div id="assets2" className="">
                     <p></p>
                     <h1></h1>
                   </div>

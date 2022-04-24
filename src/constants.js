@@ -220,7 +220,6 @@ export const assetStyles = [
         className={`main relative ${selectedStyle == 3 && " border"}`}
         onClick={() => onClick(3)}
         style={{
-          height: "50px",
           fontFamily: font.value,
           boxShadow,
           color: fontColor.value,
