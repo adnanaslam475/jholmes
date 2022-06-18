@@ -8,9 +8,8 @@ class CloudinaryUploadWidget extends Component {
   componentDidMount() {
     var myWidget = window.cloudinary.createUploadWidget(
       {
-        cloudName: "mernapp",
+        cloudName: "mernappss",
         uploadPreset: "ml_default",
-        // api_key:''
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
